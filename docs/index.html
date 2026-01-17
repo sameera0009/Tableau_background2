@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Glass Dashboard</title>
+  <title>Executive Dashboard</title>
   <style>
     * {
       margin: 0;
@@ -15,7 +15,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
     .page {
@@ -35,97 +35,115 @@
       display: block;
     }
 
-    header, footer {
+    header {
       position: relative;
       z-index: 3;
-      backdrop-filter: blur(28px) saturate(180%);
-      background: linear-gradient(90deg, rgba(255,255,255,0.22), rgba(255,255,255,0.16), rgba(255,255,255,0.22));
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12), inset 0 1px 2px rgba(255,255,255,0.3);
-      border-bottom: 1px solid rgba(255,255,255,0.35);
-    }
-
-    header {
-      height: 85px;
+      backdrop-filter: blur(40px) saturate(180%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+      box-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 20px 60px rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      height: 90px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 50px;
+      padding: 0 60px;
     }
 
-    footer {
-      height: 70px;
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 50px;
-      border-top: 1px solid rgba(255,255,255,0.35);
-      border-bottom: none;
-      box-shadow: 0 -8px 32px rgba(0,0,0,0.12), inset 0 -1px 2px rgba(255,255,255,0.3);
+      gap: 20px;
     }
 
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .logo-container {
+      position: relative;
+      width: 56px;
+      height: 56px;
     }
 
     .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #06b6d4 100%);
-      box-shadow: 0 12px 28px rgba(59,130,246,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
-      border: 2px solid rgba(255,255,255,0.5);
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
+      box-shadow: 
+        0 8px 32px rgba(30,64,175,0.3),
+        0 2px 8px rgba(0,0,0,0.2),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        inset 0 -2px 4px rgba(0,0,0,0.1);
+      border: 1.5px solid rgba(255,255,255,0.3);
       position: relative;
-      animation: logo-pulse 4s ease-in-out infinite;
+      overflow: hidden;
     }
 
     .logo::before {
       content: '';
       position: absolute;
-      top: 6px;
-      left: 6px;
-      right: 6px;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-      border-radius: 10px;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 55%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+      border-radius: 12px 12px 50% 50%;
     }
 
     .logo::after {
       content: '';
       position: absolute;
-      inset: -6px;
-      background: linear-gradient(135deg, rgba(56,189,248,0.4), rgba(59,130,246,0.4));
-      border-radius: 20px;
-      filter: blur(16px);
-      z-index: -1;
-      opacity: 0.6;
-      animation: logo-glow 4s ease-in-out infinite;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(255,255,255,0.5);
     }
 
-    .status-indicator {
+    .logo-glow {
+      position: absolute;
+      inset: -8px;
+      background: radial-gradient(circle, rgba(30,64,175,0.4), transparent 70%);
+      border-radius: 20px;
+      filter: blur(20px);
+      animation: logo-breathe 4s ease-in-out infinite;
+    }
+
+    .brand-text {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: rgba(255,255,255,0.95);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    .header-actions {
       display: flex;
-      gap: 12px;
+      gap: 32px;
       align-items: center;
     }
 
-    .status-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.6);
-      box-shadow: 0 4px 12px rgba(255,255,255,0.4), inset 0 1px 2px rgba(255,255,255,0.5);
-      position: relative;
+    .time-display {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    .status-dot::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
+    .status-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .status-item {
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      filter: blur(6px);
-      animation: ripple 2s ease-out infinite;
+      background: rgba(34,197,94,0.9);
+      box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 2px 4px rgba(0,0,0,0.2);
+      animation: status-pulse 3s ease-in-out infinite;
     }
 
     .content {
@@ -135,44 +153,45 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 50px;
+      padding: 50px 60px;
     }
 
     .container {
       width: 100%;
-      max-width: 1600px;
+      max-width: 1800px;
+      height: 100%;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       grid-template-rows: repeat(3, 1fr);
-      gap: 32px;
-      height: calc(100vh - 235px);
+      gap: 36px;
+      height: 100%;
     }
 
     .card {
       position: relative;
-      border-radius: 28px;
-      backdrop-filter: blur(40px) saturate(180%);
-      background: linear-gradient(145deg, rgba(255,255,255,0.32), rgba(255,255,255,0.14));
+      border-radius: 24px;
+      backdrop-filter: blur(50px) saturate(180%);
+      background: linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
       box-shadow: 
-        0 16px 64px rgba(2,6,23,0.35),
-        0 8px 28px rgba(59,130,246,0.2),
-        inset 0 2px 4px rgba(255,255,255,0.4),
-        inset 0 -2px 4px rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.4);
+        0 20px 80px rgba(0,10,40,0.25),
+        0 8px 32px rgba(30,64,175,0.12),
+        inset 0 1px 2px rgba(255,255,255,0.3),
+        inset 0 -1px 2px rgba(0,0,0,0.05);
+      border: 1.5px solid rgba(255,255,255,0.25);
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(145deg, rgba(255,255,255,0.2), transparent 70%);
-      opacity: 0.7;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+      opacity: 1;
       pointer-events: none;
     }
 
@@ -180,142 +199,235 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(125,211,252,0.35), transparent 65%);
+      background: radial-gradient(circle at 50% 40%, rgba(96,165,250,0.25), transparent 70%);
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: opacity 1.2s ease;
     }
 
     .card:hover::after {
       opacity: 1;
-      animation: pulse-glow 2s ease-in-out infinite;
     }
 
     .card:hover {
-      transform: translateY(-12px) scale(1.03);
+      transform: translateY(-8px) scale(1.015);
       box-shadow: 
-        0 28px 80px rgba(2,6,23,0.45),
-        0 12px 48px rgba(59,130,246,0.4),
-        inset 0 3px 6px rgba(255,255,255,0.5),
-        inset 0 -2px 6px rgba(255,255,255,0.2);
-      border-color: rgba(255,255,255,0.65);
+        0 32px 120px rgba(0,10,40,0.35),
+        0 16px 64px rgba(30,64,175,0.25),
+        inset 0 2px 4px rgba(255,255,255,0.4),
+        inset 0 -1px 3px rgba(0,0,0,0.08);
+      border-color: rgba(255,255,255,0.4);
     }
 
     .card-glow {
       position: absolute;
-      inset: -12px;
+      inset: -16px;
       border-radius: 32px;
-      background: linear-gradient(135deg, rgba(56,189,248,0.4), rgba(59,130,246,0.35), rgba(6,182,212,0.3));
-      filter: blur(28px);
+      background: linear-gradient(135deg, rgba(30,64,175,0.3), rgba(59,130,246,0.25), rgba(14,165,233,0.2));
+      filter: blur(32px);
       opacity: 0;
-      transition: opacity 0.8s ease;
+      transition: opacity 1s ease;
       pointer-events: none;
     }
 
     .card:hover .card-glow {
       opacity: 1;
-      animation: breathe-glow 3s ease-in-out infinite;
+      animation: elite-breathe 3.5s ease-in-out infinite;
     }
 
-    .card-inner {
+    .card-content {
       position: absolute;
       inset: 0;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1), inset 0 1px 2px rgba(255,255,255,0.3);
+      transition: all 0.5s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 8px 24px rgba(30,64,175,0.3), inset 0 1px 2px rgba(255,255,255,0.4);
+    }
+
+    .card-badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(34,197,94,0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(34,197,94,0.3);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      box-shadow: 0 2px 12px rgba(34,197,94,0.2);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .metric-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      box-shadow: 0 2px 8px rgba(255,255,255,0.4);
     }
 
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(32px);
-      opacity: 0.5;
-      transition: all 0.8s ease;
+      filter: blur(40px);
+      opacity: 0.3;
+      transition: all 1s ease;
+      pointer-events: none;
     }
 
     .card:hover .blob {
-      opacity: 0.85;
-      filter: blur(36px);
+      opacity: 0.6;
+      filter: blur(45px);
     }
 
-    .shimmer {
+    .scan-line {
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%);
-      background-size: 200% 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
       opacity: 0;
-      transition: opacity 0.4s;
+      transition: opacity 0.5s;
+      pointer-events: none;
     }
 
-    .card:hover .shimmer {
+    .card:hover .scan-line {
       opacity: 1;
-      animation: shimmer-sweep 3s ease-in-out infinite;
+      animation: scan-effect 4s ease-in-out infinite;
     }
 
-    .corner {
+    .grid-lines {
       position: absolute;
-      opacity: 0.4;
-      transition: all 0.6s ease;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.6s;
+      pointer-events: none;
     }
 
-    .corner-tl {
-      top: 18px;
-      left: 18px;
-      width: 60px;
-      height: 60px;
-      border-top: 3px solid rgba(255,255,255,0.6);
-      border-left: 3px solid rgba(255,255,255,0.6);
-      border-radius: 16px 0 0 0;
+    .card:hover .grid-lines {
+      opacity: 0.15;
     }
 
-    .corner-br {
-      bottom: 18px;
-      right: 18px;
-      width: 60px;
-      height: 60px;
-      border-bottom: 3px solid rgba(255,255,255,0.6);
-      border-right: 3px solid rgba(255,255,255,0.6);
-      border-radius: 0 0 16px 0;
+    .grid-line-h, .grid-line-v {
+      position: absolute;
+      background: rgba(255,255,255,0.3);
     }
 
-    .card:hover .corner {
-      opacity: 1;
-      width: 80px;
-      height: 80px;
+    .grid-line-h {
+      left: 0;
+      right: 0;
+      height: 1px;
     }
 
-    /* Creative Grid Layout */
+    .grid-line-v {
+      top: 0;
+      bottom: 0;
+      width: 1px;
+    }
+
+    footer {
+      position: relative;
+      z-index: 3;
+      backdrop-filter: blur(40px) saturate(180%);
+      background: linear-gradient(0deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+      box-shadow: 0 -1px 0 rgba(255,255,255,0.4), 0 -20px 60px rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(255,255,255,0.3);
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+    }
+
+    .footer-info {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.3px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .connection-status {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .connection-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(34,197,94,0.9), rgba(22,163,74,0.9));
+      box-shadow: 
+        0 0 16px rgba(34,197,94,0.8),
+        0 2px 8px rgba(0,0,0,0.2),
+        inset 0 1px 2px rgba(255,255,255,0.5);
+      animation: connection-pulse 2s ease-in-out infinite;
+    }
+
+    .connection-text {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Grid Layouts */
     .card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-    .card:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+    .card:nth-child(2) { grid-column: span 2; grid-row: span 1; }
     .card:nth-child(3) { grid-column: span 2; grid-row: span 1; }
-    .card:nth-child(4) { grid-column: span 1; grid-row: span 2; }
-    .card:nth-child(5) { grid-column: span 2; grid-row: span 2; }
+    .card:nth-child(4) { grid-column: span 3; grid-row: span 2; }
+    .card:nth-child(5) { grid-column: span 3; grid-row: span 2; }
     .card:nth-child(6) { grid-column: span 2; grid-row: span 1; }
 
-    @keyframes logo-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+    @keyframes logo-breathe {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
     }
 
-    @keyframes logo-glow {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
+    @keyframes status-pulse {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
 
-    @keyframes ripple {
-      0% {
-        transform: scale(1);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(2.5);
-        opacity: 0;
-      }
+    @keyframes connection-pulse {
+      0%, 100% { box-shadow: 0 0 16px rgba(34,197,94,0.8), 0 2px 8px rgba(0,0,0,0.2); }
+      50% { box-shadow: 0 0 24px rgba(34,197,94,1), 0 2px 12px rgba(0,0,0,0.3); }
     }
 
     @keyframes slideIn {
       from {
         opacity: 0;
-        transform: translateY(50px) scale(0.9);
+        transform: translateY(60px) scale(0.94);
       }
       to {
         opacity: 1;
@@ -323,69 +435,35 @@
       }
     }
 
-    @keyframes breathe-glow {
-      0%, 100% {
-        opacity: 0.8;
-        transform: scale(0.97);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.04);
-      }
-    }
-
-    @keyframes pulse-glow {
+    @keyframes elite-breathe {
       0%, 100% {
         opacity: 0.7;
+        transform: scale(0.96);
       }
       50% {
         opacity: 1;
+        transform: scale(1.05);
       }
     }
 
-    @keyframes gentle1 {
+    @keyframes elite-float {
       0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(12px, -10px) rotate(5deg); }
-      66% { transform: translate(-8px, 8px) rotate(-5deg); }
+      25% { transform: translate(14px, -12px) rotate(3deg); }
+      50% { transform: translate(-8px, 10px) rotate(-3deg); }
+      75% { transform: translate(10px, -8px) rotate(2deg); }
     }
 
-    @keyframes gentle2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-10px, 14px) scale(1.1); }
+    @keyframes scan-effect {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
     }
 
-    @keyframes gentle3 {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      25% { transform: translate(10px, -8px) rotate(-8deg); }
-      75% { transform: translate(-12px, 6px) rotate(8deg); }
-    }
-
-    @keyframes shimmer-sweep {
-      from { 
-        background-position: -200% 0; 
-      }
-      to { 
-        background-position: 200% 0; 
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.5;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.3);
-      }
-    }
-
-    .card:nth-child(1) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0s both; }
-    .card:nth-child(2) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
-    .card:nth-child(3) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
-    .card:nth-child(4) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
-    .card:nth-child(5) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
-    .card:nth-child(6) { animation: slideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+    .card:nth-child(1) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0s both; }
+    .card:nth-child(2) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .card:nth-child(3) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+    .card:nth-child(4) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+    .card:nth-child(5) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .card:nth-child(6) { animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
   </style>
 </head>
 <body>
@@ -393,13 +471,21 @@
     <canvas id="bg"></canvas>
 
     <header>
-      <div class="logo-section">
-        <div class="logo"></div>
+      <div class="brand">
+        <div class="logo-container">
+          <div class="logo-glow"></div>
+          <div class="logo"></div>
+        </div>
+        <div class="brand-text">EXECUTIVE PORTAL</div>
       </div>
-      <div class="status-indicator">
-        <div class="status-dot" style="animation-delay: 0s"></div>
-        <div class="status-dot" style="animation-delay: 0.15s"></div>
-        <div class="status-dot" style="animation-delay: 0.3s"></div>
+      <div class="header-actions">
+        <div class="time-display" id="timeDisplay">00:00:00</div>
+        <div class="status-bar">
+          <div class="status-item" style="animation-delay: 0s"></div>
+          <div class="status-item" style="animation-delay: 0.3s"></div>
+          <div class="status-item" style="animation-delay: 0.6s"></div>
+          <div class="status-item" style="animation-delay: 0.9s"></div>
+        </div>
       </div>
     </header>
 
@@ -408,83 +494,146 @@
         <div class="grid">
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:110px;height:110px;background:rgba(96,165,250,0.3);top:28%;left:32%;animation:gentle1 9s ease-in-out infinite"></div>
-              <div class="blob" style="width:90px;height:90px;background:rgba(6,182,212,0.25);bottom:28%;right:32%;animation:gentle2 11s ease-in-out infinite"></div>
-              <div class="blob" style="width:75px;height:75px;background:rgba(56,189,248,0.28);top:52%;right:45%;animation:gentle3 8s ease-in-out infinite"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">ACTIVE</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:140px;height:140px;background:rgba(30,64,175,0.25);top:30%;left:35%;animation:elite-float 12s ease-in-out infinite"></div>
+            <div class="blob" style="width:110px;height:110px;background:rgba(59,130,246,0.2);bottom:30%;right:35%;animation:elite-float 14s ease-in-out infinite 0.5s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 33%"></div>
+              <div class="grid-line-h" style="top: 66%"></div>
+              <div class="grid-line-v" style="left: 33%"></div>
+              <div class="grid-line-v" style="left: 66%"></div>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:85px;height:85px;background:rgba(96,165,250,0.3);top:35%;left:35%;animation:gentle2 8s ease-in-out infinite 0.4s"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">LIVE</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:100px;height:100px;background:rgba(30,64,175,0.25);top:35%;left:38%;animation:elite-float 11s ease-in-out infinite 0.3s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 50%"></div>
+              <div class="grid-line-v" style="left: 50%"></div>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:95px;height:95px;background:rgba(6,182,212,0.28);top:35%;left:38%;animation:gentle3 9.5s ease-in-out infinite 0.2s"></div>
-              <div class="blob" style="width:70px;height:70px;background:rgba(56,189,248,0.25);bottom:32%;right:35%;animation:gentle1 8.5s ease-in-out infinite 0.8s"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">SECURE</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:95px;height:95px;background:rgba(59,130,246,0.22);bottom:35%;right:40%;animation:elite-float 13s ease-in-out infinite 0.7s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 50%"></div>
+              <div class="grid-line-v" style="left: 50%"></div>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:95px;height:95px;background:rgba(56,189,248,0.3);top:38%;left:38%;animation:gentle1 9s ease-in-out infinite 0.3s"></div>
-              <div class="blob" style="width:80px;height:80px;background:rgba(96,165,250,0.25);bottom:35%;right:35%;animation:gentle3 10s ease-in-out infinite 0.7s"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">REAL-TIME</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:125px;height:125px;background:rgba(30,64,175,0.24);top:32%;left:38%;animation:elite-float 13s ease-in-out infinite 0.2s"></div>
+            <div class="blob" style="width:105px;height:105px;background:rgba(59,130,246,0.2);bottom:32%;right:38%;animation:elite-float 15s ease-in-out infinite 0.8s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 33%"></div>
+              <div class="grid-line-h" style="top: 66%"></div>
+              <div class="grid-line-v" style="left: 33%"></div>
+              <div class="grid-line-v" style="left: 66%"></div>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:105px;height:105px;background:rgba(6,182,212,0.28);top:30%;left:35%;animation:gentle2 10s ease-in-out infinite 0.5s"></div>
-              <div class="blob" style="width:85px;height:85px;background:rgba(96,165,250,0.26);top:45%;right:42%;animation:gentle1 9s ease-in-out infinite 0.9s"></div>
-              <div class="blob" style="width:70px;height:70px;background:rgba(56,189,248,0.24);bottom:30%;left:40%;animation:gentle3 8s ease-in-out infinite 0.6s"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">VERIFIED</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:130px;height:130px;background:rgba(30,64,175,0.26);top:35%;left:40%;animation:elite-float 14s ease-in-out infinite 0.4s"></div>
+            <div class="blob" style="width:100px;height:100px;background:rgba(59,130,246,0.22);bottom:35%;right:42%;animation:elite-float 12s ease-in-out infinite 0.9s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 33%"></div>
+              <div class="grid-line-h" style="top: 66%"></div>
+              <div class="grid-line-v" style="left: 33%"></div>
+              <div class="grid-line-v" style="left: 66%"></div>
+            </div>
           </div>
 
           <div class="card">
             <div class="card-glow"></div>
-            <div class="card-inner">
-              <div class="blob" style="width:90px;height:90px;background:rgba(56,189,248,0.3);top:38%;left:40%;animation:gentle3 8.5s ease-in-out infinite 0.4s"></div>
-              <div class="blob" style="width:75px;height:75px;background:rgba(6,182,212,0.26);bottom:35%;right:38%;animation:gentle2 9.5s ease-in-out infinite 0.8s"></div>
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon"></div>
+                <div class="card-badge">ONLINE</div>
+              </div>
+              <div class="card-footer">
+                <div class="metric-dot"></div>
+                <div class="metric-dot"></div>
+              </div>
             </div>
-            <div class="shimmer"></div>
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-br"></div>
+            <div class="blob" style="width:105px;height:105px;background:rgba(30,64,175,0.24);top:38%;left:40%;animation:elite-float 12.5s ease-in-out infinite 0.6s"></div>
+            <div class="scan-line"></div>
+            <div class="grid-lines">
+              <div class="grid-line-h" style="top: 50%"></div>
+              <div class="grid-line-v" style="left: 50%"></div>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
     <footer>
-      <div class="status-indicator">
-        <div class="status-dot" style="animation: pulse 2.5s ease-in-out infinite"></div>
-        <div class="status-dot" style="animation: pulse 2.5s ease-in-out infinite 0.25s"></div>
-        <div class="status-dot" style="animation: pulse 2.5s ease-in-out infinite 0.5s"></div>
-      </div>
-      <div class="status-indicator">
-        <div class="status-dot" style="animation: pulse 2.5s ease-in-out infinite 0.75s"></div>
-        <div class="status-dot" style="animation: pulse 2.5s ease-in-out infinite 1s"></div>
+      <div class="footer-info">SECURE CONNECTION ESTABLISHED</div>
+      <div class="connection-status">
+        <div class="connection-dot"></div>
+        <div class="connection-text">ENCRYPTED</div>
       </div>
     </footer>
   </div>
@@ -506,39 +655,46 @@
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        const gradient = ctx.createRadialGradient(
-          canvas.width * 0.5, canvas.height * 0.35, 0,
-          canvas.width * 0.5, canvas.height * 0.5, canvas.width * 0.85
-        );
-        gradient.addColorStop(0, '#0ea5e9');
-        gradient.addColorStop(0.35, '#0284c7');
-        gradient.addColorStop(0.65, '#0369a1');
-        gradient.addColorStop(1, '#075985');
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, '#0c4a6e');
+        gradient.addColorStop(0.3, '#075985');
+        gradient.addColorStop(0.6, '#0369a1');
+        gradient.addColorStop(1, '#0284c7');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.save();
-        for (let i = 0; i < 10; i++) {
+        ctx.globalCompositeOperation = 'screen';
+        for (let i = 0; i < 12; i++) {
           ctx.beginPath();
-          for (let x = 0; x < canvas.width; x += 2) {
-            const y = canvas.height * (0.15 + i * 0.09) + 
-              Math.sin((x * 0.0018) + (time * 0.009) + (i * 0.8)) * 28 + 
-              Math.cos((x * 0.0013) + (time * 0.006) + (i * 0.5)) * 20 +
-              Math.sin((x * 0.0025) + (time * 0.004)) * 15;
+          for (let x = 0; x < canvas.width; x += 1.5) {
+            const y = canvas.height * (0.12 + i * 0.08) + 
+              Math.sin((x * 0.0015) + (time * 0.007) + (i * 0.9)) * 22 + 
+              Math.cos((x * 0.001) + (time * 0.005) + (i * 0.6)) * 16;
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           }
-          ctx.strokeStyle = `rgba(255,255,255,${0.04 + Math.sin(time * 0.025 + i) * 0.025})`;
-          ctx.lineWidth = 1.8;
+          ctx.strokeStyle = `rgba(255,255,255,${0.025 + Math.sin(time * 0.02 + i) * 0.015})`;
+          ctx.lineWidth = 1.2;
           ctx.stroke();
         }
-        ctx.restore();
+        ctx.globalCompositeOperation = 'source-over';
 
         time += 1;
         requestAnimationFrame(draw);
       }
 
       draw();
+
+      function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('timeDisplay').textContent = hours + ':' + minutes + ':' + seconds;
+      }
+
+      updateTime();
+      setInterval(updateTime, 1000);
     })();
   </script>
 </body>
